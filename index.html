@@ -3,20 +3,18 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Handbook de Acessibilidade Digital — Protótipo WCAG</title>
+  <title>Handbook WCAG — Protótipo</title>
   <style>
     :root {
       --bg: #ffffff;
       --text: #1f1f1f;
       --muted: #555555;
-      --border: #d6d6d6;
-      --panel: #f6f6f6;
+      --border: #d8d8d8;
+      --panel: #f7f7f7;
       --accent: #e0dede;
+      --link: #0b4a7a;
       --focus: #000000;
-      --ok: #eef7ee;
-      --warn: #fff8e5;
-      --code: #f2f2f2;
-      --max: 1180px;
+      --max: 980px;
     }
 
     * {
@@ -30,19 +28,18 @@
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
+      font-size: 1rem;
       line-height: 1.55;
       color: var(--text);
       background: var(--bg);
-      font-size: 1rem;
     }
 
     a {
-      color: #0b4a7a;
+      color: var(--link);
       text-underline-offset: 0.16em;
     }
 
     a:focus,
-    button:focus,
     input:focus,
     summary:focus {
       outline: 3px solid var(--focus);
@@ -53,14 +50,20 @@
       position: absolute;
       top: -4rem;
       left: 1rem;
-      z-index: 1000;
+      z-index: 999;
+      padding: .75rem 1rem;
       background: #000000;
       color: #ffffff;
-      padding: 0.75rem 1rem;
     }
 
     .skip-link:focus {
       top: 1rem;
+    }
+
+    .wrap {
+      width: min(100% - 2rem, var(--max));
+      margin-inline: auto;
+      padding-block: 1.25rem;
     }
 
     header {
@@ -68,118 +71,83 @@
       border-bottom: 1px solid var(--border);
     }
 
-    .wrap {
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 1.25rem;
-    }
-
     .eyebrow {
+      margin: 0 0 .35rem;
+      font-size: .875rem;
       font-weight: 700;
       letter-spacing: .04em;
       text-transform: uppercase;
-      color: #3d3d3d;
-      margin-bottom: .25rem;
-      font-size: .875rem;
     }
 
     h1 {
       margin: 0;
-      font-size: clamp(1.8rem, 3vw, 3rem);
+      font-size: clamp(1.8rem, 4vw, 3rem);
       line-height: 1.1;
     }
 
     h2 {
       margin-top: 2rem;
-      border-bottom: 2px solid var(--border);
       padding-bottom: .35rem;
-      font-size: 1.55rem;
+      border-bottom: 2px solid var(--border);
+      font-size: 1.45rem;
     }
 
     h3 {
-      margin-top: 1.25rem;
-      font-size: 1.25rem;
+      margin-top: 1.35rem;
+      font-size: 1.2rem;
     }
 
-    nav[aria-label="Índice principal"] {
-      background: #ffffff;
+    .subtitle {
+      max-width: 760px;
+      margin-bottom: 0;
+      color: #333333;
+    }
+
+    nav {
       border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 10;
+      background: #ffffff;
     }
 
     nav ul {
-      list-style: none;
-      padding: 0;
       display: flex;
       flex-wrap: wrap;
       gap: .5rem;
+      padding: 0;
       margin: 0;
+      list-style: none;
     }
 
     nav a {
       display: inline-block;
-      padding: .55rem .75rem;
+      padding: .5rem .75rem;
       border: 1px solid var(--border);
       border-radius: .5rem;
-      background: #ffffff;
-      color: #1f1f1f;
+      color: var(--text);
       text-decoration: none;
     }
 
     nav a:hover {
+      background: var(--panel);
       text-decoration: underline;
     }
 
-    .intro-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-
-    .panel {
+    .search-panel {
+      margin-top: 1.25rem;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: .8rem;
       background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: .75rem;
-      padding: 1rem;
-    }
-
-    .flow {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .5rem;
-      align-items: center;
-      margin: 1rem 0;
-    }
-
-    .flow span {
-      display: inline-block;
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: .5rem;
-      padding: .45rem .65rem;
-      font-weight: 700;
-    }
-
-    .search-box {
-      margin-top: 1rem;
-      padding: 1rem;
-      border: 2px solid var(--border);
-      border-radius: .75rem;
-      background: #ffffff;
     }
 
     label {
-      font-weight: 700;
       display: block;
       margin-bottom: .4rem;
+      font-weight: 700;
     }
 
     input[type="search"] {
       width: 100%;
-      max-width: 42rem;
+      max-width: 40rem;
       padding: .75rem;
       border: 2px solid var(--border);
       border-radius: .5rem;
@@ -187,41 +155,91 @@
     }
 
     .hint {
+      margin: .4rem 0 0;
       color: var(--muted);
-      margin-top: .4rem;
-      font-size: .95rem;
     }
 
-    .category-index {
-      columns: 2 20rem;
-      margin-top: .5rem;
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: .8rem;
+      margin-top: 1rem;
     }
 
-    .category-index li {
-      margin-bottom: .35rem;
-      break-inside: avoid;
-    }
-
-    .card {
+    .category-card {
+      display: block;
+      min-height: 8rem;
+      padding: 1rem;
       border: 1px solid var(--border);
       border-radius: .8rem;
-      margin: 1rem 0;
-      overflow: clip;
       background: #ffffff;
+      color: var(--text);
+      text-decoration: none;
     }
 
-    .card-header {
-      background: var(--accent);
-      padding: 1rem;
+    .category-card:hover {
+      background: var(--panel);
+      text-decoration: underline;
+    }
+
+    .category-card strong {
+      display: block;
+      margin-bottom: .3rem;
+      font-size: 1.12rem;
+    }
+
+    .category-card span {
+      color: var(--muted);
+    }
+
+    .symptom-list {
+      padding: 0;
+      margin: 1rem 0;
+      border-top: 1px solid var(--border);
+      list-style: none;
+    }
+
+    .symptom-list li {
       border-bottom: 1px solid var(--border);
     }
 
-    .card-header p {
-      margin: .25rem 0 0;
+    .symptom-list a {
+      display: block;
+      padding: .85rem .35rem;
+      text-decoration: none;
+    }
+
+    .symptom-list a:hover {
+      background: var(--panel);
+      text-decoration: underline;
+    }
+
+    .problem {
+      margin-top: 2rem;
+      padding: 1rem;
+      border: 1px solid var(--border);
+      border-radius: .8rem;
+      background: #ffffff;
+    }
+
+    .problem header {
+      margin: -1rem -1rem 1rem;
+      padding: 1rem;
+      border-bottom: 1px solid var(--border);
+      border-radius: .8rem .8rem 0 0;
+      background: var(--accent);
+    }
+
+    .problem h3 {
+      margin: 0;
+    }
+
+    .problem .summary {
+      margin: .35rem 0 0;
       color: #333333;
     }
 
-    .tag-row {
+    .meta {
       display: flex;
       flex-wrap: wrap;
       gap: .4rem;
@@ -230,74 +248,47 @@
 
     .tag {
       display: inline-block;
+      padding: .1rem .5rem;
       border: 1px solid #777777;
       border-radius: 999px;
-      padding: .15rem .55rem;
       background: #ffffff;
       font-size: .9rem;
     }
 
-    .card-body {
+    .solution-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 0;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: .8rem;
     }
 
-    .card-body section {
-      padding: 1rem;
-      border-right: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      min-height: 100%;
+    .box {
+      padding: .85rem;
+      border: 1px solid var(--border);
+      border-radius: .65rem;
+      background: var(--panel);
     }
 
-    .card-body section:last-child {
-      border-right: 0;
+    .box h4 {
+      margin: 0 0 .4rem;
+      font-size: 1rem;
     }
 
-    .solution {
-      background: var(--ok);
-    }
-
-    .attention {
-      background: var(--warn);
-    }
-
-    .mini-title {
-      font-weight: 700;
-      margin-top: 0;
-      margin-bottom: .5rem;
-    }
-
-    .checklist {
+    .box ul,
+    .box ol {
+      margin: .4rem 0 0;
       padding-left: 1.2rem;
     }
 
-    .checklist li {
+    .box li {
       margin-bottom: .35rem;
     }
 
-    code {
-      background: var(--code);
-      padding: .1rem .25rem;
-      border-radius: .25rem;
-      font-family: Consolas, Monaco, monospace;
-      font-size: .95em;
-    }
-
-    pre {
-      background: var(--code);
-      padding: .75rem;
-      overflow-x: auto;
-      border-radius: .5rem;
-      border: 1px solid var(--border);
-    }
-
     details {
-      border: 1px solid var(--border);
-      border-radius: .6rem;
+      margin-top: .8rem;
       padding: .75rem;
+      border: 1px solid var(--border);
+      border-radius: .65rem;
       background: #ffffff;
-      margin: .75rem 0;
     }
 
     summary {
@@ -305,18 +296,38 @@
       font-weight: 700;
     }
 
+    code {
+      padding: .08rem .25rem;
+      border-radius: .25rem;
+      background: #eeeeee;
+      font-family: Consolas, Monaco, monospace;
+      font-size: .95em;
+    }
+
+    pre {
+      overflow-x: auto;
+      padding: .75rem;
+      border: 1px solid var(--border);
+      border-radius: .55rem;
+      background: #eeeeee;
+    }
+
+    .backlink {
+      margin-top: 1rem;
+    }
+
     .result-count {
+      margin-top: .7rem;
       font-weight: 700;
-      margin-top: .75rem;
     }
 
     .no-results {
       display: none;
       margin-top: 1rem;
-      border: 2px solid var(--border);
-      border-radius: .75rem;
       padding: 1rem;
-      background: var(--warn);
+      border: 1px solid var(--border);
+      border-radius: .8rem;
+      background: #fff8e5;
     }
 
     footer {
@@ -325,24 +336,15 @@
       background: var(--panel);
     }
 
-    @media (max-width: 760px) {
-      nav[aria-label="Índice principal"] {
-        position: static;
-      }
-
-      .card-body {
-        display: block;
-      }
-
-      .card-body section {
-        border-right: 0;
-      }
+    [hidden] {
+      display: none !important;
     }
 
     @media print {
-      nav[aria-label="Índice principal"],
-      .search-box,
-      .skip-link {
+      .skip-link,
+      nav,
+      .search-panel,
+      .backlink {
         display: none;
       }
 
@@ -350,13 +352,8 @@
         font-size: 11pt;
       }
 
-      .card {
+      .problem {
         break-inside: avoid;
-      }
-
-      a::after {
-        content: " (" attr(href) ")";
-        font-size: 9pt;
       }
     }
   </style>
@@ -366,517 +363,490 @@
 
   <header>
     <div class="wrap">
-      <p class="eyebrow">Protótipo experimental</p>
-      <h1>Handbook de Acessibilidade Digital</h1>
-      <p>Modelo de consulta rápida por sintoma, causa provável e solução técnica mínima, inspirado em manuais de manutenção.</p>
+      <p class="eyebrow">Protótipo HTML</p>
+      <h1>Handbook WCAG</h1>
+      <p class="subtitle">Consulta rápida por sintoma, causa provável e solução mínima para problemas comuns de acessibilidade digital.</p>
     </div>
   </header>
 
   <nav aria-label="Índice principal">
     <div class="wrap">
       <ul>
-        <li><a href="#como-usar">Como usar</a></li>
-        <li><a href="#indice-sintomas">Índice por sintomas</a></li>
-        <li><a href="#teclado">Teclado e foco</a></li>
-        <li><a href="#semantica">Semântica</a></li>
-        <li><a href="#formularios">Formulários</a></li>
-        <li><a href="#visual">Percepção visual</a></li>
-        <li><a href="#dinamico">Conteúdo dinâmico</a></li>
-        <li><a href="#modelo">Modelo de item</a></li>
+        <li><a href="#categorias">Categorias</a></li>
+        <li><a href="#sintomas">Sintomas</a></li>
+        <li><a href="#solucoes">Soluções</a></li>
+        <li><a href="#modelo">Modelo de expansão</a></li>
       </ul>
     </div>
   </nav>
 
   <main id="conteudo" class="wrap">
-    <section id="como-usar" aria-labelledby="titulo-como-usar">
-      <h2 id="titulo-como-usar">Como usar este handbook</h2>
-      <p>O objetivo não é substituir a WCAG, a ABNT NBR 17225 ou uma auditoria completa. O objetivo é reduzir o tempo entre perceber um problema e aplicar uma correção técnica inicial.</p>
+    <section aria-labelledby="como-usar">
+      <h2 id="como-usar">Como usar</h2>
+      <p>Comece pelo sintoma observado. Depois, abra a solução correspondente e confira causa provável, correção mínima, validação e critério WCAG relacionado.</p>
 
-      <div class="flow" aria-label="Fluxo de decisão">
-        <span>Sintoma observado</span>
-        <span>→</span>
-        <span>Causa provável</span>
-        <span>→</span>
-        <span>Solução mínima</span>
-        <span>→</span>
-        <span>Como validar</span>
-        <span>→</span>
-        <span>Critério WCAG relacionado</span>
-      </div>
-
-      <div class="intro-grid">
-        <article class="panel">
-          <h3>Para desenvolvimento</h3>
-          <p>Use antes de criar componentes, telas, formulários e fluxos interativos. A consulta deve começar pelo comportamento esperado do usuário, não pelo número do critério.</p>
-        </article>
-
-        <article class="panel">
-          <h3>Para correção de bugs</h3>
-          <p>Use quando houver um sintoma claro, como “não funciona com Tab”, “leitor de tela não anuncia o erro” ou “o botão não tem nome acessível”.</p>
-        </article>
-
-        <article class="panel">
-          <h3>Para governança</h3>
-          <p>Use como base para padronizar respostas técnicas, criar cards de conhecimento e orientar sustentação de sistemas.</p>
-        </article>
-      </div>
-
-      <div class="search-box" role="search">
-        <label for="busca">Buscar por sintoma, componente, causa ou critério</label>
-        <input id="busca" type="search" autocomplete="off" placeholder="Ex.: teclado, imagem, contraste, formulário, 1.1.1, modal">
-        <p class="hint">A busca filtra os itens deste protótipo sem recarregar a página.</p>
+      <div class="search-panel" role="search">
+        <label for="busca">Buscar no handbook</label>
+        <input id="busca" type="search" autocomplete="off" placeholder="Ex.: teclado, foco, formulário, contraste, modal, imagem">
+        <p class="hint">A busca mostra ou oculta os problemas cadastrados neste protótipo.</p>
         <p id="resultado-busca" class="result-count" aria-live="polite"></p>
       </div>
-
       <div id="sem-resultados" class="no-results" role="status">
-        Nenhum item encontrado neste protótipo. Em uma versão completa, este ponto indicaria uma lacuna a ser cadastrada no handbook.
+        Nenhum problema encontrado neste protótipo.
       </div>
     </section>
 
-    <section id="indice-sintomas" aria-labelledby="titulo-indice">
-      <h2 id="titulo-indice">Índice por sintomas</h2>
-      <ul class="category-index">
-        <li><a href="#hb-teclado-1">Não consigo acessar um componente usando Tab</a></li>
-        <li><a href="#hb-teclado-2">O foco visual desaparece ou é difícil de perceber</a></li>
-        <li><a href="#hb-semantica-1">O leitor de tela não informa o tipo ou o nome do controle</a></li>
-        <li><a href="#hb-form-1">Campo de formulário é anunciado sem rótulo</a></li>
-        <li><a href="#hb-form-2">Mensagem de erro aparece visualmente, mas não é anunciada</a></li>
-        <li><a href="#hb-visual-1">Texto ou ícone tem baixo contraste</a></li>
-        <li><a href="#hb-visual-2">Imagem importante não tem alternativa textual</a></li>
-        <li><a href="#hb-dinamico-1">Modal abre, mas o foco fica perdido na página</a></li>
+    <section id="categorias" aria-labelledby="titulo-categorias">
+      <h2 id="titulo-categorias">Categorias</h2>
+
+      <div class="category-grid">
+        <a class="category-card" href="#teclado">
+          <strong>Teclado e foco</strong>
+          <span>Problemas de navegação, ordem do foco e foco visível.</span>
+        </a>
+
+        <a class="category-card" href="#formularios">
+          <strong>Formulários</strong>
+          <span>Rótulos, instruções, erros e validação.</span>
+        </a>
+
+        <a class="category-card" href="#visual">
+          <strong>Conteúdo visual</strong>
+          <span>Imagens, contraste, ícones e uso de cor.</span>
+        </a>
+
+        <a class="category-card" href="#componentes">
+          <strong>Componentes dinâmicos</strong>
+          <span>Modais, menus, abas e atualizações de interface.</span>
+        </a>
+      </div>
+    </section>
+
+    <section id="sintomas" aria-labelledby="titulo-sintomas">
+      <h2 id="titulo-sintomas">Índice por sintomas</h2>
+
+      <h3 id="teclado">Teclado e foco</h3>
+      <ul class="symptom-list">
+        <li><a href="#problema-tab">Não consigo acessar um componente usando Tab</a></li>
+        <li><a href="#problema-foco">O foco visual desaparece</a></li>
+      </ul>
+
+      <h3 id="formularios">Formulários</h3>
+      <ul class="symptom-list">
+        <li><a href="#problema-label">Campo de formulário é anunciado sem rótulo</a></li>
+        <li><a href="#problema-erro">Erro aparece na tela, mas não é anunciado</a></li>
+      </ul>
+
+      <h3 id="visual">Conteúdo visual</h3>
+      <ul class="symptom-list">
+        <li><a href="#problema-contraste">Texto ou ícone tem baixo contraste</a></li>
+        <li><a href="#problema-alt">Imagem importante não tem alternativa textual</a></li>
+      </ul>
+
+      <h3 id="componentes">Componentes dinâmicos</h3>
+      <ul class="symptom-list">
+        <li><a href="#problema-modal">Modal abre, mas o foco fica perdido na página</a></li>
       </ul>
     </section>
 
-    <section id="teclado" aria-labelledby="titulo-teclado">
-      <h2 id="titulo-teclado">Teclado e foco</h2>
+    <section id="solucoes" aria-labelledby="titulo-solucoes">
+      <h2 id="titulo-solucoes">Soluções</h2>
 
-      <article id="hb-teclado-1" class="card" data-keywords="teclado tab foco componente botão link wcag 2.1.1 2.4.3">
-        <div class="card-header">
+      <article id="problema-tab" class="problem" data-keywords="teclado tab foco componente botão link wcag 2.1.1 2.4.3">
+        <header>
           <h3>Não consigo acessar um componente usando Tab</h3>
-          <p>Sintoma típico: o usuário consegue clicar com o mouse, mas não consegue chegar ao componente pelo teclado.</p>
-          <div class="tag-row" aria-label="Etiquetas">
+          <p class="summary">O componente funciona com mouse, mas não entra na sequência de navegação por teclado.</p>
+          <div class="meta" aria-label="Referências">
             <span class="tag">Teclado</span>
-            <span class="tag">Componente interativo</span>
             <span class="tag">WCAG 2.1.1</span>
             <span class="tag">WCAG 2.4.3</span>
           </div>
-        </div>
-        <div class="card-body">
-          <section>
-            <p class="mini-title">Possíveis causas</p>
-            <ul class="checklist">
-              <li>Elemento clicável criado com <code>&lt;div&gt;</code> ou <code>&lt;span&gt;</code>.</li>
+        </header>
+
+        <div class="solution-grid">
+          <section class="box">
+            <h4>Causas prováveis</h4>
+            <ul>
+              <li>Uso de <code>&lt;div&gt;</code> ou <code>&lt;span&gt;</code> como controle.</li>
               <li>Uso indevido de <code>tabindex="-1"</code>.</li>
-              <li>Componente customizado sem suporte a teclado.</li>
-              <li>Ordem visual diferente da ordem do DOM.</li>
+              <li>Componente customizado sem evento de teclado.</li>
             </ul>
           </section>
-          <section class="solution">
-            <p class="mini-title">Solução mínima</p>
-            <ul class="checklist">
-              <li>Use <code>&lt;button&gt;</code> para ações e <code>&lt;a href&gt;</code> para navegação.</li>
-              <li>Evite criar controles interativos com elementos neutros.</li>
+
+          <section class="box">
+            <h4>Solução mínima</h4>
+            <ol>
+              <li>Use <code>&lt;button&gt;</code> para ações.</li>
+              <li>Use <code>&lt;a href&gt;</code> para navegação.</li>
               <li>Garanta acionamento por Enter e, quando aplicável, Espaço.</li>
-              <li>Mantenha a ordem do foco coerente com a ordem visual.</li>
-            </ul>
+            </ol>
           </section>
-          <section class="attention">
-            <p class="mini-title">Como validar</p>
-            <ul class="checklist">
-              <li>Navegue pela tela usando apenas Tab, Shift+Tab, Enter e Espaço.</li>
-              <li>Confirme se todos os elementos acionáveis recebem foco.</li>
-              <li>Confirme se a sequência do foco é previsível.</li>
+
+          <section class="box">
+            <h4>Como validar</h4>
+            <ul>
+              <li>Navegue usando apenas Tab e Shift+Tab.</li>
+              <li>Acione os controles pelo teclado.</li>
+              <li>Confirme se a ordem do foco é previsível.</li>
             </ul>
           </section>
         </div>
+
+        <details>
+          <summary>Exemplo de correção</summary>
+          <pre><code>&lt;button type="button"&gt;Abrir filtros&lt;/button&gt;
+
+&lt;a href="/relatorios"&gt;Ver relatórios&lt;/a&gt;</code></pre>
+        </details>
+
+        <p class="backlink"><a href="#sintomas">Voltar ao índice de sintomas</a></p>
       </article>
 
-      <article id="hb-teclado-2" class="card" data-keywords="foco visível outline indicador foco wcag 2.4.7 2.4.11 css">
-        <div class="card-header">
-          <h3>O foco visual desaparece ou é difícil de perceber</h3>
-          <p>Sintoma típico: ao navegar por teclado, o usuário não sabe onde está na tela.</p>
-          <div class="tag-row" aria-label="Etiquetas">
+      <article id="problema-foco" class="problem" data-keywords="foco visível outline indicador css wcag 2.4.7 2.4.11">
+        <header>
+          <h3>O foco visual desaparece</h3>
+          <p class="summary">Ao navegar com Tab, a pessoa não sabe qual elemento está ativo.</p>
+          <div class="meta" aria-label="Referências">
             <span class="tag">Foco visível</span>
-            <span class="tag">CSS</span>
             <span class="tag">WCAG 2.4.7</span>
             <span class="tag">WCAG 2.4.11</span>
           </div>
-        </div>
-        <div class="card-body">
-          <section>
-            <p class="mini-title">Possíveis causas</p>
-            <ul class="checklist">
-              <li>Remoção global de <code>outline</code> no CSS.</li>
+        </header>
+
+        <div class="solution-grid">
+          <section class="box">
+            <h4>Causas prováveis</h4>
+            <ul>
+              <li>Remoção de <code>outline</code> no CSS.</li>
               <li>Indicador de foco com contraste insuficiente.</li>
-              <li>Foco deslocado para elemento fora da área visível.</li>
+              <li>Foco enviado para área fora da tela.</li>
             </ul>
           </section>
-          <section class="solution">
-            <p class="mini-title">Solução mínima</p>
-            <ul class="checklist">
-              <li>Nunca use <code>outline: none</code> sem alternativa equivalente.</li>
-              <li>Defina indicador de foco consistente para links, botões, campos e componentes.</li>
-              <li>Garanta contraste e espessura suficientes para o indicador.</li>
-            </ul>
+
+          <section class="box">
+            <h4>Solução mínima</h4>
+            <ol>
+              <li>Não remova <code>outline</code> sem alternativa equivalente.</li>
+              <li>Padronize foco para links, botões e campos.</li>
+              <li>Use contraste, espessura e afastamento suficientes.</li>
+            </ol>
           </section>
-          <section class="attention">
-            <p class="mini-title">Como validar</p>
-            <ul class="checklist">
-              <li>Use Tab do início ao fim da página.</li>
-              <li>Confirme se o foco é visível em todos os componentes.</li>
+
+          <section class="box">
+            <h4>Como validar</h4>
+            <ul>
+              <li>Percorra a página usando Tab.</li>
               <li>Teste em fundos claros, escuros e imagens.</li>
+              <li>Confirme se todos os componentes têm foco visível.</li>
             </ul>
           </section>
         </div>
+
         <details>
-          <summary>Exemplo de correção CSS</summary>
+          <summary>Exemplo de correção</summary>
           <pre><code>a:focus,
 button:focus,
-input:focus,
-select:focus,
-textarea:focus {
+input:focus {
   outline: 3px solid #000;
   outline-offset: 3px;
 }</code></pre>
         </details>
+
+        <p class="backlink"><a href="#sintomas">Voltar ao índice de sintomas</a></p>
       </article>
-    </section>
 
-    <section id="semantica" aria-labelledby="titulo-semantica">
-      <h2 id="titulo-semantica">Semântica e nome acessível</h2>
-
-      <article id="hb-semantica-1" class="card" data-keywords="semântica nome acessível role value leitor de tela botão aria label wcag 4.1.2">
-        <div class="card-header">
-          <h3>O leitor de tela não informa o tipo ou o nome do controle</h3>
-          <p>Sintoma típico: o leitor de tela anuncia “clicável” ou apenas “botão”, sem explicar a ação.</p>
-          <div class="tag-row" aria-label="Etiquetas">
-            <span class="tag">Nome acessível</span>
-            <span class="tag">ARIA</span>
-            <span class="tag">WCAG 4.1.2</span>
-          </div>
-        </div>
-        <div class="card-body">
-          <section>
-            <p class="mini-title">Possíveis causas</p>
-            <ul class="checklist">
-              <li>Botão composto apenas por ícone sem texto acessível.</li>
-              <li>Componente customizado sem função programática.</li>
-              <li>Uso de ARIA sem atualizar estados, como <code>aria-expanded</code>.</li>
-            </ul>
-          </section>
-          <section class="solution">
-            <p class="mini-title">Solução mínima</p>
-            <ul class="checklist">
-              <li>Prefira elementos HTML nativos.</li>
-              <li>Forneça nome acessível com texto visível, <code>aria-label</code> ou <code>aria-labelledby</code>.</li>
-              <li>Atualize estados de componentes expansíveis, selecionáveis ou alternáveis.</li>
-            </ul>
-          </section>
-          <section class="attention">
-            <p class="mini-title">Como validar</p>
-            <ul class="checklist">
-              <li>Inspecione a árvore de acessibilidade do navegador.</li>
-              <li>Teste com leitor de tela se o controle informa nome, função e estado.</li>
-              <li>Evite nomes genéricos como “clique aqui”, “ícone” ou “botão”.</li>
-            </ul>
-          </section>
-        </div>
-      </article>
-    </section>
-
-    <section id="formularios" aria-labelledby="titulo-formularios">
-      <h2 id="titulo-formularios">Formulários</h2>
-
-      <article id="hb-form-1" class="card" data-keywords="formulário campo rótulo label input aria-labelledby wcag 1.3.1 3.3.2 4.1.2">
-        <div class="card-header">
+      <article id="problema-label" class="problem" data-keywords="formulário campo label rótulo input placeholder wcag 1.3.1 3.3.2 4.1.2">
+        <header>
           <h3>Campo de formulário é anunciado sem rótulo</h3>
-          <p>Sintoma típico: o leitor de tela anuncia “editável” ou “campo de texto”, mas não informa o que deve ser preenchido.</p>
-          <div class="tag-row" aria-label="Etiquetas">
+          <p class="summary">O leitor de tela informa apenas “campo de texto” ou “editável”, sem indicar o que deve ser preenchido.</p>
+          <div class="meta" aria-label="Referências">
             <span class="tag">Formulário</span>
-            <span class="tag">Rótulo</span>
             <span class="tag">WCAG 1.3.1</span>
             <span class="tag">WCAG 3.3.2</span>
+            <span class="tag">WCAG 4.1.2</span>
           </div>
-        </div>
-        <div class="card-body">
-          <section>
-            <p class="mini-title">Possíveis causas</p>
-            <ul class="checklist">
+        </header>
+
+        <div class="solution-grid">
+          <section class="box">
+            <h4>Causas prováveis</h4>
+            <ul>
               <li>Campo sem <code>&lt;label&gt;</code> associado.</li>
               <li>Placeholder usado como único rótulo.</li>
-              <li>ID do campo diferente do atributo <code>for</code> do rótulo.</li>
+              <li><code>for</code> do rótulo diferente do <code>id</code> do campo.</li>
             </ul>
           </section>
-          <section class="solution">
-            <p class="mini-title">Solução mínima</p>
-            <ul class="checklist">
-              <li>Associe cada campo a um <code>&lt;label&gt;</code>.</li>
-              <li>Use instruções complementares fora do placeholder.</li>
-              <li>Quando houver ajuda ou regra de preenchimento, associe com <code>aria-describedby</code>.</li>
-            </ul>
+
+          <section class="box">
+            <h4>Solução mínima</h4>
+            <ol>
+              <li>Associe cada campo a um rótulo visível.</li>
+              <li>Use placeholder apenas como apoio.</li>
+              <li>Associe instruções com <code>aria-describedby</code>, quando necessário.</li>
+            </ol>
           </section>
-          <section class="attention">
-            <p class="mini-title">Como validar</p>
-            <ul class="checklist">
-              <li>Clique no texto do rótulo e veja se o foco vai para o campo.</li>
-              <li>Teste com leitor de tela se o campo é anunciado com nome e instrução.</li>
+
+          <section class="box">
+            <h4>Como validar</h4>
+            <ul>
+              <li>Clique no rótulo e veja se o foco vai para o campo.</li>
+              <li>Inspecione o nome acessível do campo.</li>
+              <li>Teste com leitor de tela.</li>
             </ul>
           </section>
         </div>
+
         <details>
-          <summary>Exemplo de correção HTML</summary>
+          <summary>Exemplo de correção</summary>
           <pre><code>&lt;label for="email"&gt;E-mail&lt;/label&gt;
 &lt;input id="email" name="email" type="email" autocomplete="email"&gt;</code></pre>
         </details>
+
+        <p class="backlink"><a href="#sintomas">Voltar ao índice de sintomas</a></p>
       </article>
 
-      <article id="hb-form-2" class="card" data-keywords="erro formulário mensagem validação aria-describedby aria-invalid status alert wcag 3.3.1 3.3.3 4.1.3">
-        <div class="card-header">
-          <h3>Mensagem de erro aparece visualmente, mas não é anunciada</h3>
-          <p>Sintoma típico: após enviar o formulário, a mensagem aparece na tela, mas usuários de leitor de tela não são avisados.</p>
-          <div class="tag-row" aria-label="Etiquetas">
+      <article id="problema-erro" class="problem" data-keywords="erro formulário validação aria-invalid aria-describedby alert live wcag 3.3.1 3.3.3 4.1.3">
+        <header>
+          <h3>Erro aparece na tela, mas não é anunciado</h3>
+          <p class="summary">Depois do envio, a mensagem de erro aparece visualmente, mas não chega ao leitor de tela.</p>
+          <div class="meta" aria-label="Referências">
             <span class="tag">Erro</span>
-            <span class="tag">Formulário</span>
             <span class="tag">WCAG 3.3.1</span>
+            <span class="tag">WCAG 3.3.3</span>
             <span class="tag">WCAG 4.1.3</span>
           </div>
-        </div>
-        <div class="card-body">
-          <section>
-            <p class="mini-title">Possíveis causas</p>
-            <ul class="checklist">
-              <li>Mensagem inserida dinamicamente sem região viva.</li>
-              <li>Campo inválido sem <code>aria-invalid="true"</code>.</li>
-              <li>Erro não associado ao campo correspondente.</li>
+        </header>
+
+        <div class="solution-grid">
+          <section class="box">
+            <h4>Causas prováveis</h4>
+            <ul>
+              <li>Mensagem dinâmica sem região viva.</li>
+              <li>Campo inválido sem <code>aria-invalid</code>.</li>
+              <li>Erro não associado ao campo.</li>
             </ul>
           </section>
-          <section class="solution">
-            <p class="mini-title">Solução mínima</p>
-            <ul class="checklist">
-              <li>Associe a mensagem ao campo com <code>aria-describedby</code>.</li>
-              <li>Marque o campo inválido com <code>aria-invalid="true"</code>.</li>
+
+          <section class="box">
+            <h4>Solução mínima</h4>
+            <ol>
+              <li>Associe o erro ao campo com <code>aria-describedby</code>.</li>
+              <li>Use <code>aria-invalid="true"</code> no campo inválido.</li>
               <li>Use <code>role="alert"</code> ou <code>aria-live</code> para avisos dinâmicos.</li>
-            </ul>
+            </ol>
           </section>
-          <section class="attention">
-            <p class="mini-title">Como validar</p>
-            <ul class="checklist">
-              <li>Envie o formulário vazio usando apenas teclado.</li>
-              <li>Confirme se o erro é anunciado e se o foco permite localizar a correção.</li>
+
+          <section class="box">
+            <h4>Como validar</h4>
+            <ul>
+              <li>Envie o formulário vazio usando teclado.</li>
+              <li>Confirme se o erro é anunciado.</li>
+              <li>Confirme se a pessoa consegue localizar o campo com erro.</li>
             </ul>
           </section>
         </div>
+
+        <p class="backlink"><a href="#sintomas">Voltar ao índice de sintomas</a></p>
       </article>
-    </section>
 
-    <section id="visual" aria-labelledby="titulo-visual">
-      <h2 id="titulo-visual">Percepção visual e conteúdo não textual</h2>
-
-      <article id="hb-visual-1" class="card" data-keywords="contraste cor texto ícone borda botão wcag 1.4.3 1.4.11">
-        <div class="card-header">
+      <article id="problema-contraste" class="problem" data-keywords="contraste cor texto ícone botão borda wcag 1.4.3 1.4.11">
+        <header>
           <h3>Texto ou ícone tem baixo contraste</h3>
-          <p>Sintoma típico: a informação existe visualmente, mas é difícil de perceber para pessoas com baixa visão ou em condições adversas de uso.</p>
-          <div class="tag-row" aria-label="Etiquetas">
+          <p class="summary">A informação existe visualmente, mas é difícil de perceber.</p>
+          <div class="meta" aria-label="Referências">
             <span class="tag">Contraste</span>
-            <span class="tag">Cor</span>
             <span class="tag">WCAG 1.4.3</span>
             <span class="tag">WCAG 1.4.11</span>
           </div>
+        </header>
+
+        <div class="solution-grid">
+          <section class="box">
+            <h4>Causas prováveis</h4>
+            <ul>
+              <li>Texto claro sobre fundo claro.</li>
+              <li>Ícones e bordas com baixo contraste.</li>
+              <li>Cor usada como único meio de indicar estado.</li>
+            </ul>
+          </section>
+
+          <section class="box">
+            <h4>Solução mínima</h4>
+            <ol>
+              <li>Revise cores de texto, ícones, bordas e estados.</li>
+              <li>Use texto, ícone ou padrão visual além da cor.</li>
+              <li>Padronize tokens de cor aprovados.</li>
+            </ol>
+          </section>
+
+          <section class="box">
+            <h4>Como validar</h4>
+            <ul>
+              <li>Meça contraste de texto e componentes.</li>
+              <li>Teste estados: foco, erro, sucesso, hover e desabilitado.</li>
+              <li>Confira se a informação não depende apenas da cor.</li>
+            </ul>
+          </section>
         </div>
-        <div class="card-body">
-          <section>
-            <p class="mini-title">Possíveis causas</p>
-            <ul class="checklist">
-              <li>Texto claro sobre fundo claro ou texto escuro sobre fundo escuro.</li>
-              <li>Ícones, bordas ou estados visuais com contraste insuficiente.</li>
-              <li>Uso de cor como único meio de comunicar estado.</li>
-            </ul>
-          </section>
-          <section class="solution">
-            <p class="mini-title">Solução mínima</p>
-            <ul class="checklist">
-              <li>Revise a paleta de cores para texto, ícones e estados de componentes.</li>
-              <li>Use texto, ícone, padrão ou mensagem além da cor.</li>
-              <li>Padronize tokens de cor aprovados para interface.</li>
-            </ul>
-          </section>
-          <section class="attention">
-            <p class="mini-title">Como validar</p>
-            <ul class="checklist">
-              <li>Use ferramenta de contraste para texto e componentes.</li>
-              <li>Teste estados: padrão, hover, foco, erro, sucesso e desabilitado.</li>
-            </ul>
-          </section>
-        </div>
+
+        <p class="backlink"><a href="#sintomas">Voltar ao índice de sintomas</a></p>
       </article>
 
-      <article id="hb-visual-2" class="card" data-keywords="imagem texto alternativo alt descrição gráfico ícone wcag 1.1.1">
-        <div class="card-header">
+      <article id="problema-alt" class="problem" data-keywords="imagem texto alternativo alt gráfico ícone descrição wcag 1.1.1">
+        <header>
           <h3>Imagem importante não tem alternativa textual</h3>
-          <p>Sintoma típico: o leitor de tela ignora uma imagem informativa ou anuncia apenas o nome do arquivo.</p>
-          <div class="tag-row" aria-label="Etiquetas">
+          <p class="summary">O leitor de tela ignora uma imagem informativa ou anuncia apenas o nome do arquivo.</p>
+          <div class="meta" aria-label="Referências">
             <span class="tag">Imagem</span>
-            <span class="tag">Texto alternativo</span>
             <span class="tag">WCAG 1.1.1</span>
           </div>
-        </div>
-        <div class="card-body">
-          <section>
-            <p class="mini-title">Possíveis causas</p>
-            <ul class="checklist">
+        </header>
+
+        <div class="solution-grid">
+          <section class="box">
+            <h4>Causas prováveis</h4>
+            <ul>
               <li>Imagem informativa sem atributo <code>alt</code>.</li>
-              <li>Texto alternativo genérico, como “imagem” ou “banner”.</li>
+              <li>Texto alternativo genérico.</li>
               <li>Imagem decorativa anunciada desnecessariamente.</li>
             </ul>
           </section>
-          <section class="solution">
-            <p class="mini-title">Solução mínima</p>
-            <ul class="checklist">
-              <li>Descreva a função ou informação da imagem, não apenas sua aparência.</li>
-              <li>Use <code>alt=""</code> para imagens puramente decorativas.</li>
-              <li>Para gráficos complexos, forneça resumo textual e dados em tabela quando necessário.</li>
-            </ul>
+
+          <section class="box">
+            <h4>Solução mínima</h4>
+            <ol>
+              <li>Descreva a função ou informação da imagem.</li>
+              <li>Use <code>alt=""</code> para imagens decorativas.</li>
+              <li>Para gráficos complexos, ofereça resumo e dados em tabela.</li>
+            </ol>
           </section>
-          <section class="attention">
-            <p class="mini-title">Como validar</p>
-            <ul class="checklist">
-              <li>Desative imagens ou navegue com leitor de tela.</li>
+
+          <section class="box">
+            <h4>Como validar</h4>
+            <ul>
+              <li>Navegue com leitor de tela.</li>
               <li>Confirme se a informação essencial continua disponível.</li>
+              <li>Verifique se imagens decorativas não geram ruído.</li>
             </ul>
           </section>
         </div>
+
+        <p class="backlink"><a href="#sintomas">Voltar ao índice de sintomas</a></p>
       </article>
-    </section>
 
-    <section id="dinamico" aria-labelledby="titulo-dinamico">
-      <h2 id="titulo-dinamico">Conteúdo dinâmico e componentes</h2>
-
-      <article id="hb-dinamico-1" class="card" data-keywords="modal dialog foco aria-modal overlay teclado esc fecha wcag 2.1.2 2.4.3 4.1.2">
-        <div class="card-header">
+      <article id="problema-modal" class="problem" data-keywords="modal dialog foco teclado esc aria-modal wcag 2.1.2 2.4.3 4.1.2">
+        <header>
           <h3>Modal abre, mas o foco fica perdido na página</h3>
-          <p>Sintoma típico: após abrir uma janela modal, o usuário continua navegando pelo conteúdo que está atrás dela.</p>
-          <div class="tag-row" aria-label="Etiquetas">
+          <p class="summary">Depois de abrir o modal, a navegação por teclado continua passando pelo conteúdo que está atrás dele.</p>
+          <div class="meta" aria-label="Referências">
             <span class="tag">Modal</span>
-            <span class="tag">Gerenciamento de foco</span>
             <span class="tag">WCAG 2.1.2</span>
+            <span class="tag">WCAG 2.4.3</span>
             <span class="tag">WCAG 4.1.2</span>
           </div>
-        </div>
-        <div class="card-body">
-          <section>
-            <p class="mini-title">Possíveis causas</p>
-            <ul class="checklist">
+        </header>
+
+        <div class="solution-grid">
+          <section class="box">
+            <h4>Causas prováveis</h4>
+            <ul>
               <li>Modal sem semântica de diálogo.</li>
               <li>Foco não movido para o modal na abertura.</li>
-              <li>Conteúdo de fundo ainda disponível para teclado e leitor de tela.</li>
-              <li>Foco não retorna ao botão de origem ao fechar.</li>
+              <li>Conteúdo de fundo ainda navegável.</li>
+              <li>Foco não retorna ao acionador ao fechar.</li>
             </ul>
           </section>
-          <section class="solution">
-            <p class="mini-title">Solução mínima</p>
-            <ul class="checklist">
-              <li>Use <code>&lt;dialog&gt;</code> quando possível ou aplique padrão ARIA de diálogo corretamente.</li>
-              <li>Mova o foco para o título ou primeiro controle do modal.</li>
-              <li>Permita fechar com Esc, quando não houver impedimento funcional.</li>
-              <li>Ao fechar, devolva o foco ao elemento que abriu o modal.</li>
-            </ul>
+
+          <section class="box">
+            <h4>Solução mínima</h4>
+            <ol>
+              <li>Use <code>&lt;dialog&gt;</code> quando possível.</li>
+              <li>Mova o foco para o modal ao abrir.</li>
+              <li>Mantenha Tab dentro do modal.</li>
+              <li>Devolva o foco ao botão de origem ao fechar.</li>
+            </ol>
           </section>
-          <section class="attention">
-            <p class="mini-title">Como validar</p>
-            <ul class="checklist">
-              <li>Abra o modal apenas com teclado.</li>
-              <li>Confirme se Tab circula apenas dentro do modal.</li>
-              <li>Feche o modal e confirme se o foco retorna ao ponto inicial.</li>
+
+          <section class="box">
+            <h4>Como validar</h4>
+            <ul>
+              <li>Abra o modal usando teclado.</li>
+              <li>Confirme se Tab não vai para o conteúdo de fundo.</li>
+              <li>Feche com Esc, quando aplicável, e confira o retorno do foco.</li>
             </ul>
           </section>
         </div>
+
+        <p class="backlink"><a href="#sintomas">Voltar ao índice de sintomas</a></p>
       </article>
     </section>
 
     <section id="modelo" aria-labelledby="titulo-modelo">
-      <h2 id="titulo-modelo">Modelo de cadastro para novos itens</h2>
-      <p>Em uma versão expandida, cada entrada poderia ser cadastrada em uma planilha, arquivo JSON ou banco de dados e renderizada automaticamente no HTML.</p>
-
-      <details open>
-        <summary>Campos mínimos sugeridos</summary>
-        <ul class="checklist">
-          <li><strong>Categoria:</strong> teclado, formulário, imagem, contraste, componente dinâmico etc.</li>
-          <li><strong>Sintoma:</strong> frase curta do problema observado.</li>
-          <li><strong>Contexto:</strong> onde normalmente acontece.</li>
-          <li><strong>Possíveis causas:</strong> lista objetiva.</li>
-          <li><strong>Solução mínima:</strong> correção prática prioritária.</li>
-          <li><strong>Como validar:</strong> teste manual ou automatizado aplicável.</li>
-          <li><strong>Critérios relacionados:</strong> WCAG e, se usado, ABNT NBR 17225.</li>
-          <li><strong>Exemplo de código:</strong> opcional, quando a correção depende de implementação.</li>
-          <li><strong>Risco se não corrigir:</strong> impacto para pessoas usuárias.</li>
-        </ul>
-      </details>
+      <h2 id="titulo-modelo">Modelo de expansão</h2>
+      <p>Para ampliar o handbook, cada novo item pode seguir a mesma estrutura: sintoma, causa provável, solução mínima, validação e referência normativa.</p>
 
       <details>
-        <summary>Exemplo de estrutura de dados</summary>
-        <pre><code>{
-  "categoria": "Formulários",
-  "sintoma": "Campo é anunciado sem rótulo",
-  "causas": [
-    "Campo sem label associado",
-    "Placeholder usado como único rótulo"
-  ],
-  "solucao_minima": [
-    "Associar label ao campo",
-    "Associar instruções com aria-describedby"
-  ],
-  "validacao": [
-    "Testar com teclado",
-    "Verificar nome acessível na árvore de acessibilidade"
-  ],
-  "criterios_wcag": ["1.3.1", "3.3.2", "4.1.2"]
-}</code></pre>
+        <summary>Campos sugeridos para cada novo item</summary>
+        <ul>
+          <li>Categoria</li>
+          <li>Sintoma</li>
+          <li>Onde costuma ocorrer</li>
+          <li>Causas prováveis</li>
+          <li>Solução mínima</li>
+          <li>Como validar</li>
+          <li>Critérios WCAG relacionados</li>
+          <li>Correspondência com ABNT NBR 17225, quando aplicável</li>
+          <li>Exemplo de código, quando necessário</li>
+        </ul>
       </details>
     </section>
   </main>
 
   <footer>
     <div class="wrap">
-      <p><strong>Observação:</strong> este é um protótipo simplificado para avaliar a dinâmica de consulta. Antes de uso institucional, o conteúdo deve passar por revisão técnica, revisão normativa e testes com pessoas desenvolvedoras.</p>
+      <p>Protótipo simplificado. Antes de uso institucional, recomenda-se revisão técnica, revisão normativa e teste com pessoas desenvolvedoras.</p>
     </div>
   </footer>
 
   <script>
-    const searchInput = document.querySelector('#busca');
-    const cards = Array.from(document.querySelectorAll('.card'));
-    const count = document.querySelector('#resultado-busca');
-    const noResults = document.querySelector('#sem-resultados');
+    const searchInput = document.querySelector("#busca");
+    const problems = Array.from(document.querySelectorAll(".problem"));
+    const count = document.querySelector("#resultado-busca");
+    const noResults = document.querySelector("#sem-resultados");
 
-    function normalize(text) {
+    function normalizeText(text) {
       return text
         .toLowerCase()
-        .normalize('NFD')
-        .replace(/[\u0300-\u036f]/g, '');
+        .normalize("NFD")
+        .replace(/[\\u0300-\\u036f]/g, "");
     }
 
-    function filterCards() {
-      const term = normalize(searchInput.value.trim());
+    function filterProblems() {
+      const term = normalizeText(searchInput.value.trim());
       let visible = 0;
 
-      cards.forEach(card => {
-        const searchableText = normalize(card.textContent + ' ' + (card.dataset.keywords || ''));
-        const match = term === '' || searchableText.includes(term);
-        card.hidden = !match;
+      problems.forEach(problem => {
+        const source = normalizeText(problem.textContent + " " + (problem.dataset.keywords || ""));
+        const match = term === "" || source.includes(term);
+        problem.hidden = !match;
         if (match) visible += 1;
       });
 
-      if (term === '') {
-        count.textContent = '';
-        noResults.style.display = 'none';
+      if (term === "") {
+        count.textContent = "";
+        noResults.style.display = "none";
       } else {
-        count.textContent = visible === 1
-          ? '1 item encontrado.'
-          : visible + ' itens encontrados.';
-        noResults.style.display = visible === 0 ? 'block' : 'none';
+        count.textContent = visible === 1 ? "1 solução encontrada." : visible + " soluções encontradas.";
+        noResults.style.display = visible === 0 ? "block" : "none";
       }
     }
 
-    searchInput.addEventListener('input', filterCards);
+    searchInput.addEventListener("input", filterProblems);
   </script>
 </body>
 </html>
+"""
+
+path = Path("/mnt/data/index-handbook-wcag-leve.html")
+path.write_text(html, encoding="utf-8")
+path
