@@ -1,0 +1,16 @@
+---
+sidebar_position: 1
+---
+
+# Sobre esta view
+
+Este handbook é renderizado a partir de um schema canônico ([`schema.json`](https://github.com/DxDad/handbook_wcag/blob/main/src/data/schema.json)) e de dados ([`data.json`](https://github.com/DxDad/handbook_wcag/blob/main/src/data/data.json)). Os mesmos dados podem alimentar outras views (ex.: uma focada em critérios WCAG) ou uma API — nada está hardcoded na apresentação.
+
+Cada item combina duas facetas independentes:
+
+- **Categoria** — que tipo de problema (ex.: teclado, leitor de tela, formulário).
+- **Componente** — onde ele aparece na UI (ex.: botão, modal, imagem).
+
+Além disso, cada item traz causa provável, solução mínima e como validar a correção.
+
+Conteúdo canônico usa a redação técnica (fonte: protótipo WCAG verificado), já que o público-alvo são designers/devs sem especialização em a11y que precisam corrigir rápido algo já apontado. O item "nome acessível de botão" não existe no protótipo WCAG original — WCAG 4.1.2 aqui é um candidato assumido, não uma correspondência verificada na fonte.
