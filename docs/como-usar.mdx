@@ -1,0 +1,64 @@
+---
+sidebar_position: 2
+title: Como ler um card
+---
+
+# Como ler um card
+
+Cada card no handbook segue sempre a mesma estrutura. Veja como navegar.
+
+## Cabeçalho do card (fechado)
+
+Quando o card está fechado, você vê:
+
+- **Sintoma** — a frase que descreve o problema como quem percebe, não como quem conserta. Ex.: *"Não consigo acessar um componente usando Tab"*.
+- **Descrição** — uma linha de contexto adicional.
+- **Badges/pills** — metadados visuais:
+  - 🔵 Azul → **Categoria** (o tipo do problema)
+  - 🟢 Verde-azulado → **Componente** (onde aparece na UI)
+  - 🔴/🟡 → **Impacto** (alto, médio ou baixo)
+  - Cinza → **Responsável** (Dev, QA, UX, Conteúdo)
+  - Azul claro com borda → **Critério WCAG**
+
+Clique no card para abrir.
+
+## Corpo do card (aberto)
+
+O card abre em três colunas:
+
+### Causa provável
+
+Lista as raízes técnicas mais comuns para esse sintoma. Use para confirmar que você está lidando com o mesmo problema antes de corrigir.
+
+> *Ex.: "Uso de `<div>` ou `<span>` como controle."*
+
+### Solução mínima
+
+Passos ordenados para corrigir. É a **dose mínima eficaz** — não um tratado sobre a melhor implementação possível.
+
+> *Ex.: "Use `<button>` para ações. Use `<a href>` para navegação."*
+
+### Como validar
+
+Como confirmar que a correção funcionou. Geralmente são passos de teste manual, sem ferramenta especializada.
+
+> *Ex.: "Navegue usando apenas Tab e Shift+Tab. Acione os controles pelo teclado."*
+
+## Código de exemplo
+
+Quando presente, aparece abaixo das três colunas como um trecho ilustrativo da solução correta. Não é um copy-paste pronto para produção — é um ponto de partida.
+
+## Critério WCAG
+
+Os badges no cabeçalho indicam os critérios de sucesso do WCAG relacionados. Quando o critério ainda não foi mapeado para um item, aparece a nota *"Critério WCAG: a definir."* no corpo do card.
+
+## Atalhos de uso
+
+| Gesto | O que faz |
+|-------|-----------|
+| **Clique** no cabeçalho | Abre ou fecha o card |
+| **Enter / Espaço** com foco no botão | Abre ou fecha (acessível por teclado) |
+| Busca por texto | Filtra por sintoma, descrição e palavras-chave |
+| Select de categoria | Filtra pelo tipo do problema |
+| Select de componente | Filtra pelo elemento de UI afetado |
+| **Limpar filtros** | Remove todos os filtros ativos |

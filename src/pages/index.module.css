@@ -1,238 +1,327 @@
+/* ====================================================
+   Skip link
+   ==================================================== */
 .skip {
   position: absolute;
   left: -9999px;
-  top: 0;
-  background: #ffb020;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  background: var(--hb-focus);
   color: #111;
-  padding: 0.75rem 1rem;
+  padding: 0.75rem 1.25rem;
   border-radius: 8px;
   font-weight: 700;
-  z-index: 999;
+  font-size: 0.9rem;
+  z-index: 9999;
+  text-decoration: none;
 }
 .skip:focus {
+  position: fixed;
   left: 1rem;
   top: 1rem;
+  width: auto;
+  height: auto;
+  overflow: visible;
 }
 
+/* ====================================================
+   Hero header
+   ==================================================== */
 .header {
-  background: var(--ink);
+  background: var(--hb-ink);
   color: #fff;
-  padding: 2.5rem 1.5rem 3rem;
+  padding: 3rem 1.5rem 3.5rem;
 }
-.wrap {
+.hInner {
   max-width: 1040px;
   margin: 0 auto;
 }
 .eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: inline-block;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.18);
   border-radius: 999px;
-  padding: 0.3rem 0.7rem;
-  font-size: 0.78rem;
+  padding: 0.28rem 0.75rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: #c7d2fe;
+  margin-bottom: 1.25rem;
 }
 .h1 {
-  font-size: clamp(1.9rem, 4vw, 2.6rem);
-  line-height: 1.12;
+  font-family: 'Space Grotesk', var(--ifm-heading-font-family);
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: #fff;
   max-width: 640px;
+  margin: 0 0 1rem;
+}
+.lead {
+  color: rgba(255,255,255,.78);
+  font-size: 1rem;
+  line-height: 1.6;
+  max-width: 580px;
+  margin: 0 0 2rem;
+}
+.lead strong {
   color: #fff;
 }
-.headerP {
-  color: rgba(255, 255, 255, 0.75);
-  max-width: 580px;
-  margin-top: 0.85rem;
-  font-size: 1.02rem;
-}
 
+/* Steps — semantic ol */
 .steps {
+  list-style: none;
+  padding: 0;
+  margin: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.75rem;
-  margin-top: 2rem;
 }
 .step {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 14px;
-  padding: 1rem;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px;
+  padding: 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
 }
-.n {
-  display: inline-block;
+.sNum {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.78rem;
   font-weight: 700;
-  color: #ffb020;
-  font-size: 0.85rem;
-  margin-bottom: 0.3rem;
+  color: var(--hb-focus);
+  letter-spacing: 0.06em;
 }
-.step p {
-  margin: 0.2rem 0 0;
-  color: rgba(255, 255, 255, 0.7);
-  font-size: 0.88rem;
+.step strong {
+  font-size: 0.92rem;
+  color: #fff;
+}
+.step span {
+  font-size: 0.84rem;
+  color: rgba(255,255,255,.65);
+  line-height: 1.45;
 }
 
+/* ====================================================
+   Main / layout
+   ==================================================== */
 .main {
   max-width: 1040px;
-  margin: -1.5rem auto 3rem;
-  padding: 0 1.5rem;
+  margin: 0 auto;
+  padding: 0 1.5rem 4rem;
 }
 
+/* ====================================================
+   Finder card
+   ==================================================== */
 .finder {
-  background: var(--ifm-background-surface-color);
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 14px;
-  padding: 1.25rem;
-  box-shadow: 0 12px 32px rgba(11, 18, 32, 0.06);
+  background: var(--hb-surface);
+  border: 1px solid var(--hb-border);
+  border-radius: 16px;
+  padding: 1.4rem 1.5rem 1.1rem;
+  box-shadow: 0 4px 24px rgba(11,18,32,.07), 0 1px 4px rgba(11,18,32,.04);
+  margin-top: -1.75rem;
+  position: relative;
+  z-index: 1;
 }
-.finderRow {
+.row {
   display: grid;
   grid-template-columns: 1fr auto auto;
   gap: 0.75rem;
+  align-items: end;
 }
-.finderRow label {
-  display: block;
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.lbl {
+  font-size: 0.78rem;
   font-weight: 600;
-  font-size: 0.82rem;
-  margin-bottom: 0.35rem;
+  color: var(--hb-muted);
+  letter-spacing: 0.01em;
 }
-.finderRow input[type='search'],
-.finderRow select {
-  min-height: 46px;
-  border: 1.5px solid var(--ifm-color-emphasis-300);
+.inp,
+.sel {
+  min-height: 44px;
+  border: 1.5px solid var(--hb-border);
   border-radius: 10px;
-  padding: 0.6rem 0.8rem;
-  font-size: 0.95rem;
+  padding: 0.55rem 0.85rem;
+  font-size: 0.92rem;
   font-family: inherit;
-  background: var(--ifm-background-surface-color);
+  background: var(--hb-surface);
   color: var(--ifm-font-color-base);
+  transition: border-color 0.15s;
   width: 100%;
 }
-.facetNote {
+.inp:focus,
+.sel:focus {
+  border-color: var(--hb-cat);
+  outline: 3px solid var(--hb-focus);
+  outline-offset: 2px;
+}
+.legend {
   display: flex;
-  gap: 1.1rem;
-  margin-top: 0.9rem;
-  font-size: 0.82rem;
+  gap: 1.5rem;
+  margin-top: 0.85rem;
+  font-size: 0.8rem;
+  color: var(--hb-muted);
 }
-.cat {
-  color: #3538cd;
-}
-.comp {
-  color: #0f766e;
-}
+.lCat { color: var(--hb-cat); }
+.lComp { color: var(--hb-comp); }
 
+/* ====================================================
+   Results bar
+   ==================================================== */
+.bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 1.25rem 0 0.75rem;
+}
 .count {
-  margin: 1.1rem 0 0.6rem;
-  font-size: 0.88rem;
+  font-size: 0.85rem;
+  color: var(--hb-muted);
+  margin: 0;
 }
-.empty {
-  padding: 1rem;
-  background: #fff8e8;
-  border: 1px solid #f5dea0;
-  border-radius: 10px;
-  color: #7a5a0b;
-  font-weight: 600;
+.clear {
+  background: none;
+  border: 1.5px solid var(--hb-border);
+  border-radius: 8px;
+  padding: 0.3rem 0.75rem;
+  font-size: 0.8rem;
+  font-family: inherit;
+  color: var(--hb-muted);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  white-space: nowrap;
+}
+.clear:hover {
+  border-color: var(--hb-cat);
+  color: var(--hb-cat);
 }
 
+/* ====================================================
+   Card list + card
+   ==================================================== */
 .list {
-  display: grid;
-  gap: 0.7rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
 }
+
 .card {
-  background: var(--ifm-background-surface-color);
-  border: 1px solid var(--ifm-color-emphasis-300);
-  border-radius: 14px;
+  background: var(--hb-surface);
+  border: 1px solid var(--hb-border);
+  border-left: 3px solid transparent;
+  border-radius: 12px;
   overflow: hidden;
+  transition: border-left-color 0.15s, box-shadow 0.15s;
 }
-.cardTitleWrap {
+.card:hover {
+  border-left-color: var(--hb-cat);
+  box-shadow: 0 2px 12px rgba(53,56,205,.08);
+}
+.cardOpen {
+  border-left-color: var(--hb-cat);
+  box-shadow: 0 2px 16px rgba(53,56,205,.10);
+}
+
+/* The h2 that wraps each button */
+.cardHWrap {
   margin: 0;
   font: inherit;
+  font-size: inherit;
 }
-.cardHead {
-  padding: 1rem 1.15rem;
+
+.cardBtn {
   display: grid;
   grid-template-columns: 1fr auto;
   gap: 1rem;
   align-items: start;
-  cursor: pointer;
+  width: 100%;
+  padding: 1.1rem 1.2rem;
   background: none;
   border: 0;
-  width: 100%;
-  text-align: left;
+  cursor: pointer;
   font: inherit;
   color: inherit;
+  text-align: left;
+  transition: background 0.1s;
 }
-.cardHead:hover {
-  background: var(--ifm-hover-overlay);
+.cardBtn:hover {
+  background: rgba(53,56,205,.03);
 }
-.cardTitle {
-  display: block;
-  font-size: 1.02rem;
+
+.cardLeft {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.sintoma {
+  font-family: 'Space Grotesk', var(--ifm-heading-font-family);
+  font-size: 1rem;
   font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
 }
 .desc {
-  display: block;
-  font-size: 0.9rem;
-  margin-top: 0.2rem;
-  opacity: 0.75;
+  font-size: 0.875rem;
+  color: var(--hb-muted);
+  line-height: 1.45;
 }
+
+/* Pills row */
 .pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 0.6rem;
+  gap: 0.35rem;
+  margin-top: 0.5rem;
 }
 .pill {
   display: inline-flex;
   align-items: center;
   border-radius: 999px;
-  padding: 0.22rem 0.6rem;
-  font-size: 0.74rem;
+  padding: 0.2rem 0.58rem;
+  font-size: 0.72rem;
   font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.4;
 }
-.pillCat {
-  background: #eef0fd;
-  color: #3538cd;
-}
-.pillComp {
-  background: #e6f5f3;
-  color: #0f766e;
-}
-.impacto-alto {
-  background: #fef0ef;
-  color: #b42318;
-}
-.impacto-medio {
-  background: #fef6e7;
-  color: #93650a;
-}
-.impacto-baixo {
-  background: #eafbf0;
-  color: #166534;
-}
-.pillRole {
-  background: #f1f3f7;
-  color: #3f4657;
-}
-.pillWcag {
-  background: #eff6ff;
-  color: #1d4ed8;
-  border: 1px solid #bfdbfe;
-}
+.pillCat  { background: var(--hb-cat-bg);    color: var(--hb-cat); }
+.pillComp { background: var(--hb-comp-bg);   color: var(--hb-comp); }
+.pillRole { background: #f1f3f7;              color: #3f4657; }
+.pillWcag { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; }
+
+/* Impact badges */
+.imp-alto  { background: var(--hb-red-bg);    color: var(--hb-red); }
+.imp-medio { background: var(--hb-yellow-bg); color: var(--hb-yellow); }
+.imp-baixo { background: var(--hb-green-bg);  color: var(--hb-green); }
+
+/* Chevron */
 .chev {
-  opacity: 0.6;
-  font-size: 1.2rem;
+  color: var(--hb-muted);
+  font-size: 1rem;
+  margin-top: 0.2rem;
   transition: transform 0.15s;
 }
-.card[data-open='true'] .chev {
+.cardOpen .chev {
   transform: rotate(180deg);
 }
 
-.cardBody {
-  border-top: 1px solid var(--ifm-color-emphasis-300);
-  padding: 1.1rem;
+/* ====================================================
+   Card body (expanded)
+   ==================================================== */
+.body {
+  border-top: 1px solid var(--hb-border);
+  padding: 1.25rem 1.2rem;
+  background: var(--hb-bg);
 }
 .boxes {
   display: grid;
@@ -240,59 +329,84 @@
   gap: 0.85rem;
 }
 .box {
-  background: var(--ifm-background-color);
-  border: 1px solid var(--ifm-color-emphasis-300);
+  background: var(--hb-surface);
+  border: 1px solid var(--hb-border);
   border-radius: 10px;
-  padding: 0.9rem;
+  padding: 0.9rem 1rem;
 }
-.box h4 {
-  font-size: 0.85rem;
-  margin-bottom: 0.5rem;
-  opacity: 0.75;
+.boxH {
+  font-size: 0.72rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.06em;
+  color: var(--hb-muted);
+  margin: 0 0 0.6rem;
 }
-.box ul,
-.box ol {
+.boxList {
   margin: 0;
-  padding-left: 1.1rem;
-  font-size: 0.9rem;
+  padding-left: 1.15rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
 }
-.box li {
+.boxList li {
   margin-bottom: 0.35rem;
 }
+
 .code {
   margin: 0.9rem 0 0;
-  background: var(--ink);
+  background: var(--hb-ink);
   color: #e5e9f2;
   border-radius: 10px;
-  padding: 0.9rem;
+  padding: 1rem 1.1rem;
   overflow-x: auto;
-  font-size: 0.83rem;
-}
-.wcagPending {
-  margin-top: 0.85rem;
   font-size: 0.82rem;
-  opacity: 0.75;
+  line-height: 1.55;
+}
+.wcagPend {
+  margin: 0.85rem 0 0;
+  font-size: 0.8rem;
+  color: var(--hb-muted);
   font-style: italic;
 }
 
-.footer {
-  margin-top: 2rem;
-  padding: 0 0 1rem;
+/* ====================================================
+   About section (footer note inside main)
+   ==================================================== */
+.about {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--hb-border);
   font-size: 0.85rem;
-  opacity: 0.8;
+  color: var(--hb-muted);
+  line-height: 1.6;
+}
+.about strong {
+  color: var(--ifm-font-color-base);
 }
 
-@media (max-width: 760px) {
-  .steps,
+/* ====================================================
+   Responsive
+   ==================================================== */
+@media (max-width: 860px) {
+  .row {
+    grid-template-columns: 1fr;
+  }
+  .steps {
+    grid-template-columns: 1fr;
+  }
   .boxes {
     grid-template-columns: 1fr;
   }
-  .finderRow {
+}
+@media (max-width: 600px) {
+  .cardBtn {
     grid-template-columns: 1fr;
   }
-  .cardHead {
-    grid-template-columns: 1fr;
+  .chev {
+    display: none;
+  }
+  .finder {
+    border-radius: 10px;
+    padding: 1rem;
   }
 }

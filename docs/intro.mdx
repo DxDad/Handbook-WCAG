@@ -1,16 +1,54 @@
 ---
 sidebar_position: 1
+title: Sobre o Handbook
 ---
 
-# Sobre esta view
+# Sobre o Handbook A11Y
 
-Este handbook é renderizado a partir de um schema canônico ([`schema.json`](https://github.com/DxDad/handbook_wcag/blob/main/src/data/schema.json)) e de dados ([`data.json`](https://github.com/DxDad/handbook_wcag/blob/main/src/data/data.json)). Os mesmos dados podem alimentar outras views (ex.: uma focada em critérios WCAG) ou uma API — nada está hardcoded na apresentação.
+Este handbook é uma ferramenta de diagnóstico rápido de acessibilidade para times de produto. O objetivo é simples: se você percebeu um problema durante um teste ou revisão, encontra a causa provável e a correção mínima aqui, sem precisar ser especialista em WCAG.
 
-Cada item combina duas facetas independentes:
+## Para quem é
 
-- **Categoria** — que tipo de problema (ex.: teclado, leitor de tela, formulário).
-- **Componente** — onde ele aparece na UI (ex.: botão, modal, imagem).
+- **Desenvolvedores front-end** que precisam corrigir um bug apontado pela equipe ou pelo cliente.
+- **QA** que precisa reproduzir e descrever um problema para o dev.
+- **Designers UX** que querem entender o impacto técnico de uma escolha visual.
 
-Além disso, cada item traz causa provável, solução mínima e como validar a correção.
+## Como o conteúdo é organizado
 
-Conteúdo canônico usa a redação técnica (fonte: protótipo WCAG verificado), já que o público-alvo são designers/devs sem especialização em a11y que precisam corrigir rápido algo já apontado. O item "nome acessível de botão" não existe no protótipo WCAG original — WCAG 4.1.2 aqui é um candidato assumido, não uma correspondência verificada na fonte.
+Cada item tem **duas facetas independentes**:
+
+| Faceta | O que é | Exemplo |
+|--------|---------|---------|
+| **Categoria** | O tipo do problema (o *que* quebrou) | Teclado e foco, Leitor de tela, Formulário |
+| **Componente** | O elemento de UI afetado (o *onde*) | Botão, Modal, Imagem |
+
+Um item pode ter múltiplos componentes (ex.: um problema de foco pode afetar tanto o botão quanto o modal). As facetas são independentes — filtre por uma, pela outra ou pelas duas.
+
+## O que cada card contém
+
+1. **Sintoma** — descrito em linguagem de quem percebeu o problema, não de quem vai resolver.
+2. **Causa provável** — as raízes técnicas mais comuns para esse sintoma.
+3. **Solução mínima** — os passos necessários para corrigir, na ordem certa.
+4. **Como validar** — como confirmar que a correção funcionou, sem ferramenta especializada.
+5. **Código de exemplo** — trecho ilustrativo quando a solução tem implementação direta.
+6. **Critérios WCAG** — os critérios de sucesso relacionados (quando mapeados).
+
+## Sobre o schema de dados
+
+Os dados vivem em [`src/data/data.json`](https://github.com/DxDad/handbook_wcag/blob/main/src/data/data.json) e seguem o contrato definido em [`src/data/schema.json`](https://github.com/DxDad/handbook_wcag/blob/main/src/data/schema.json). Os campos principais:
+
+```json
+{
+  "id": "tab-nao-acessa",
+  "sintoma": "Não consigo acessar um componente usando Tab",
+  "categoria": "teclado",
+  "componentes": ["botao", "link"],
+  "causas_provaveis": ["..."],
+  "solucao_minima": ["..."],
+  "validacao": ["..."],
+  "impacto": "alto",
+  "wcag": ["2.1.1", "2.4.3"]
+}
+```
+
+O schema é agnóstico de apresentação: os mesmos dados podem alimentar outros formatos (view por critério WCAG, API REST, exportação CSV) sem alterar a estrutura.

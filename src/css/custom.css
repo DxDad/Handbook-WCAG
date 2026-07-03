@@ -1,11 +1,8 @@
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
-/* You can override the default Infima variables here. */
 :root {
+  --ifm-font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+  --ifm-heading-font-family: 'Space Grotesk', sans-serif;
   --ifm-color-primary: #3538cd;
   --ifm-color-primary-dark: #2c2fb8;
   --ifm-color-primary-darker: #292cad;
@@ -13,12 +10,26 @@
   --ifm-color-primary-light: #4649da;
   --ifm-color-primary-lighter: #5255dd;
   --ifm-color-primary-lightest: #7274e4;
-  --ifm-code-font-size: 95%;
+  --ifm-code-font-size: 90%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
-  --ink: #0b1220;
+  --hb-ink: #0b1220;
+  --hb-focus: #ffb020;
+  --hb-surface: #ffffff;
+  --hb-bg: #f5f7fa;
+  --hb-border: #e2e7ef;
+  --hb-muted: #5b6472;
+  --hb-cat: #3538cd;
+  --hb-cat-bg: #eef0fd;
+  --hb-comp: #0f766e;
+  --hb-comp-bg: #e6f5f3;
+  --hb-red: #b42318;
+  --hb-red-bg: #fef0ef;
+  --hb-yellow: #93650a;
+  --hb-yellow-bg: #fef6e7;
+  --hb-green: #166534;
+  --hb-green-bg: #eafbf0;
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
   --ifm-color-primary: #7274e4;
   --ifm-color-primary-dark: #5255dd;
@@ -28,5 +39,23 @@
   --ifm-color-primary-lighter: #9294eb;
   --ifm-color-primary-lightest: #b4b5f2;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-  --ink: #0b1220;
+  --hb-surface: #1e2030;
+  --hb-bg: #13141f;
+  --hb-border: #2d3148;
+  --hb-muted: #8892a4;
+}
+
+*:focus-visible {
+  outline: 3px solid var(--hb-focus) !important;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.navbar {
+  border-bottom: 1px solid var(--hb-border);
+  box-shadow: none;
+}
+
+code, pre, kbd {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
 }
